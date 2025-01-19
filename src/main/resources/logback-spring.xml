@@ -2,7 +2,7 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
-    <springProperty name="springAppName" source="spring.application.name" defaultValue="myapp" />
+    <springProperty name="foo" source="app.foo" defaultValue="NotSet" />
 
     <conversionRule conversionWord="toUpperCase" converterClass="com.example.logback_custom_fields.UpperCaseConverter"/>
 
@@ -11,7 +11,7 @@
             <provider class="net.logstash.logback.composite.loggingevent.LoggingEventPatternJsonProvider">
                 <pattern>
                     {
-                    "springAppName": "%toUpperCase{${springAppName}}"
+                    "foo": "%toUpperCase{${foo}}"
                     }
                 </pattern>
             </provider>
@@ -20,7 +20,7 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} -%kvp- %msg %toUpperCase{${springAppName}}%n</pattern>
+            <pattern>%-4relative [%thread] %-5level %logger{35} -%kvp- %msg %toUpperCase{${foo}}%n</pattern>
         </encoder>
     </appender>
 
